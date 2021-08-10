@@ -4,7 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node app.ts",
+    "dev:ts": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -18,10 +20,14 @@
   },
   "homepage": "https://github.com/YoniZangolsaz/Milestone3#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "config.ts": "^1.0.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "@types/node": "^16.4.13"
+    "@types/node": "^16.4.13",
+    "nodemon": "^2.0.12",
+    "ts-node": "^10.2.0"
   }
 }
