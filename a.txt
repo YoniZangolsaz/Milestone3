@@ -1,0 +1,119 @@
+ 1892  npm eslint
+ 1893  npm eslint-config-airbnb-base
+ 1894  npm i eslint
+ 1895  npm i eslint-config-airbnb-base
+ 1896  npm i eslint-plugin-import
+ 1897  cd node/mission3
+ 1898  node file_mover.js 
+ 1899  xterm-256color
+ 1900  $ printf `\033[2J`
+ 1901  $ urxvt -bg black -fg green
+ 1902  urxvt -bg black -fg green
+ 1903  git checkout develop
+ 1904  git branch
+ 1905  cd mission3
+ 1906  node file_mover.js 
+ 1907  cd ..
+ 1908  cd finalmission/
+ 1909  node app.js
+ 1910  cd..
+ 1911  cd ..
+ 1912  cd mission2
+ 1913  node jokes.js
+ 1914  cd ..
+ 1915  cd finalmission/
+ 1916  node app.js
+ 1917  node app.js
+ 1918  run npm start
+ 1919  node app.js
+ 1920  tcp app.ts -w
+ 1921  tsc app.ts -w
+ 1922  npm install config.ts
+ 1923  tsc app.ts 
+ 1924  node app.js 
+ 1925  tsc app.ts 
+ 1926  node app.js 
+ 1927  tsc app.ts 
+ 1928  node app.js 
+ 1929  tsc app.ts 
+ 1930  node app.js 
+ 1931  tsc app.ts 
+ 1932  node app.js 
+ 1933  tsc app.ts 
+ 1934  node app.js 
+ 1935  npm i body-parser
+ 1936  node app.js 
+ 1937  tsc app.ts 
+ 1938  node app.js 
+ 1939  tsc app.ts 
+ 1940  node app.js 
+ 1941  tsc app.ts 
+ 1942  node app.js 
+ 1943  tsc app.ts 
+ 1944  node app.js 
+ 1945  npm i nodemon
+ 1946  npm install -g nodemon
+ 1947  npm run dev
+ 1948  tsc app.ts 
+ 1949  node app.js 
+ 1950  tsc app.ts 
+ 1951  node app.js 
+ 1952  tsc app.ts 
+ 1953  npm i nodemon
+ 1954  npm start
+ 1955  npm install nodemon --save-dev
+ 1956  npm install ts-node --save-dev
+ 1957  npm start
+ 1958  tsc app.ts 
+ 1959  node app.js 
+ 1960  tsc app.ts 
+ 1961  node app.js 
+ 1962  tsc app.ts 
+ 1963  node app.js 
+ 1964  tsc app.ts 
+ 1965  node app.js 
+ 1966  npm start
+ 1967  tsc app.ts 
+ 1968  node app.js 
+ 1969  npm start
+ 1970  tsc app.ts 
+ 1971  node app.js 
+ 1972  tsc app.ts 
+ 1973  node app.js 
+ 1974  tsc app.ts 
+ 1975  node app.js 
+ 1976  npm start
+ 1977  tsc app.ts 
+ 1978  node app.js 
+ 1979  tsc app.ts 
+ 1980  node app.js 
+ 1981  tsc app.ts 
+ 1982  node app.js 
+ 1983  tsc app.ts 
+ 1984  node app.js 
+ 1985  tsc app.ts 
+ 1986  node app.js 
+ 1987  tsc app.ts 
+ 1988  node app.js 
+ 1989  ypescript -v
+ 1990  typescript -v
+ 1991  tsc --version
+ 1992  npm install --save-dev eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin
+ 1993  touch .eslintrc
+ 1994  node_modules
+ 1995  npm run lint
+ 1996  node app.ts
+ 1997  tsc app.ts
+ 1998  node app.js 
+ 1999  tsc app.ts
+ 2000  npm run lint
+ 2001  npm install eslint-config-airbnb-typescript --save-dev
+ 2002  npm install eslint-plugin-import@^2.22.0             eslint-plugin-jsx-a11y@^6.3.1             eslint-plugin-react@^7.20.3             eslint-plugin-react-hooks@^4.0.8             @typescript-eslint/eslint-plugin@^4.4.1             --save-dev
+ 2003  npx eslint . --ext .js,.jsx,.ts,.tsx
+ 2004  npm i --save-dev tslint-config-airbnb
+ 2005  npm install --save-dev eslint prettier eslint-config-prettier eslint-plugin-prettier @typescript-eslint/parser @typescript-eslint/eslint-plugin
+ 2006  npm install express && npm install --save-dev typescript nodemon @types/node @types/express
+ 2007  npm start
+ 2008  history
+ 2009  npm start
+ 2010  history
