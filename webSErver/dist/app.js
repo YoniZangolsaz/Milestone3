@@ -34,19 +34,21 @@ app.set('view engine', 'ejs');
 app.post('/api/numbers/prime/validate', (req, res) => {
     let bodyProperies = req.body;
     let bodyValue = Object.values(bodyProperies);
+    let primeNumber = true;
+    let regularNumber = false;
     for (let i = 0; i < bodyValue.length;) {
         let numberResult = isprime(bodyValue[i]);
         if (numberResult === true) {
             i++;
         }
         else {
-            res.send(false);
+            res.send(regularNumber);
         }
     }
-    res.send(true);
+    res.send(primeNumber);
 });
 app.get('/api/numbers/prime/', (req, res) => {
-    let amountValue = (req.query.amount);
+    let amountValue = parseInt(req.query.amount);
     let listOfNumber = [];
     if (amountValue <= 32) {
         for (let i = 1; listOfNumber.length < amountValue; i++) {

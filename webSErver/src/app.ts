@@ -12,8 +12,10 @@ const port = process.env.SERVER_PORT || config.PORT ;
 app.set('view engine', 'ejs');
 
 app.post('/api/numbers/prime/validate', (req, res) => {
-    let bodyProperies:number = req.body;
-    let bodyValue:any[] = Object.values(bodyProperies);
+    let bodyProperies:object = req.body;
+    let bodyValue:number[] = Object.values(bodyProperies);
+    let primeNumber:boolean = true;
+    let regularNumber:boolean = false;
     
     for(let i = 0; i < bodyValue.length;) {
       let numberResult = isprime(bodyValue[i]);
@@ -21,14 +23,14 @@ app.post('/api/numbers/prime/validate', (req, res) => {
         i++;
       }
       else {
-        res.send(false)
+        res.send(regularNumber)
       }
     }
-    res.send (true);
+    res.send (primeNumber);
 })
 
 app.get('/api/numbers/prime/', (req, res) => {
-    let amountValue:any = (req.query.amount); 
+    let amountValue:number = parseInt(req.query.amount as string);
     let listOfNumber:number[] = [];
 
     if(amountValue <= 32) {

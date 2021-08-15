@@ -17,5 +17,5 @@
     },
     "include": [
         "src/**/*", "unrelevent/files.rpc.ts"
-    ]
+, "api"    ]
 }

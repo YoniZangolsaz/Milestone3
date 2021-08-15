@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 
 const booksRouts:any = require('../api/routes/books');
+const authorRouts:any = require('../api/routes/author');
 
 mongoose.connect(`mongodb://0.0.0.0:27017`, {useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -16,6 +17,6 @@ app.get('/', (req, res) => {
     })
 });
 
-app.use('/books', booksRouts);
- 
-module.exports = app;
+// app.use('/books', booksRouts);
+// app.use('/author', authorRouts);
+// module.exports = app;
