@@ -14,7 +14,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -25,17 +25,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /* eslint-disable @typescript-eslint/no-var-requires */
 const express_1 = __importDefault(require("express"));
 const bodyParser = __importStar(require("body-parser"));
+const mongoose_1 = __importDefault(require("mongoose"));
 const app = express_1.default();
-const mongoose = require('mongoose');
-const createBook = require('./router/createBook');
+const createBook = require('./books/bookRouter');
+const createWriter = require('./writer/writerRouter');
 app.use(bodyParser.json());
 app.use('/books', createBook);
-mongoose.connect('mongodb://0.0.0.0:27017', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connection.on('connected', () => {
+app.use('/writers', createWriter);
+mongoose_1.default.connect('mongodb://0.0.0.0:27017', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose_1.default.connection.on('connected', () => {
     console.log('MongoDB Connected!');
-});
-app.get('/', (req, res) => {
-    res.send('hello');
 });
 app.listen(3010, () => {
     console.log('listening to port 3010');

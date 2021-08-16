@@ -26,11 +26,11 @@ router.get('/', (req, res) => __awaiter(this, void 0, void 0, function* () {
 }));
 // Submit a book
 router.post('/', (req, res) => __awaiter(this, void 0, void 0, function* () {
-    const { nameOfBook, descriptionOfBook, dateBublicOfBook, writerOfBook, numberOfPage, } = req.body;
+    const { nameOfBook, descriptionOfBook, datePublicOfBook, writerOfBook, numberOfPage, } = req.body;
     const book = new Book({
         nameOfBook: req.body.nameOfBook,
         descriptionOfBook: req.body.descriptionOfBook,
-        dateBublicOfBook: req.body.dateBublicOfBook,
+        datePublicOfBook: req.body.datePublicOfBook,
         writerOfBook: req.body.writerOfBook,
         numberOfPage: req.body.numberOfPage,
     });
@@ -65,7 +65,7 @@ router.delete('/:bookId', (req, res) => __awaiter(this, void 0, void 0, function
 // Update a book
 router.patch('/:bookId', (req, res) => __awaiter(this, void 0, void 0, function* () {
     try {
-        const updatedBook = yield Book.update({ _id: req.params.bookId }, { $set: { nameOfBook: req.body.nameOfBook } }, { $set: { descriptionOfBook: req.body.descriptionOfBook } });
+        const updatedBook = yield Book.updateAll({ _id: req.params.bookId }, { $set: { nameOfBook: req.body.nameOfBook } });
         res.json(updatedBook);
     }
     catch (err) {
