@@ -2,14 +2,14 @@
 /* eslint-disable import/newline-after-import */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-const express1 = require('express');
-const router1 = express1.Router();
-const Writer = require('./writerModel');
+import express from 'express';
+import Writer from './writerModel';
+const router = express.Router();
 
 // Get all writers
-router1.get('/', async (req:any, res:any) => {
+router.get('/', async (req:any, res:any) => {
   try {
-    const writers = await Writer.find();
+    const writers = await Writer.find().populate('listOfBook');
     res.json(writers);
   } catch (err) {
     res.json({ message: err });
@@ -17,7 +17,7 @@ router1.get('/', async (req:any, res:any) => {
 });
 
 // Submit a writer
-router1.post('/', async (req:any, res:any) => {
+router.post('/', async (req:any, res:any) => {
   const {
     firstName, lastName, yearOfBirth, listOfBook
   } = req.body;
@@ -35,18 +35,8 @@ router1.post('/', async (req:any, res:any) => {
   }
 });
 
-// Spesific writer
-router1.get('/:writerId', async (req:any, res:any) => {
-  try {
-    const writer = await Writer.findById(req.params.writerId);
-    res.json(writer);
-  } catch (err) {
-    res.json({ message: err });
-  }
-});
-
 // Delete writer
-router1.delete('/:writerId', async (req:any, res:any) => {
+router.delete('/:writerId', async (req:any, res:any) => {
   try {
     const removedWriter = await Writer.remove({ _id: req.params.writerId });
     res.json(removedWriter);
@@ -56,7 +46,7 @@ router1.delete('/:writerId', async (req:any, res:any) => {
 });
 
 // Update a writer
-router1.patch('/:writerId', async (req:any, res:any) => {
+router.patch('/:writerId', async (req:any, res:any) => {
   try {
     const updatedWriter = await Writer.updateOne(
       { _id: req.params.writerId },
@@ -68,4 +58,62 @@ router1.patch('/:writerId', async (req:any, res:any) => {
   }
 });
 
-module.exports = router1;
+// Spesific writer
+router.get('/name/:nameOfWriter', async (req:any, res:any) => {
+  try {
+    const writer = await Writer.findOne({firstName:req.params.nameOfWriter}).select('listOfBook -_id').populate('listOfBook');
+    res.json(writer);
+  } catch (err) {
+    res.json({ message: err });
+  }
+  
+});
+
+router.get('/aggregate', async (req: any, res: any) => {
+  try {
+      const writer = await Writer.aggregate([
+          {
+              $lookup: {
+                  from: 'books',
+                  localField: 'listOfBook',
+                  foreignField: '_id',
+                  as: 'books'
+              }
+          },
+          {
+              $match: {
+                  'firstName': {
+                      '$regex': new RegExp('^p.*$'),
+                      '$options': 'i'
+                  }
+              }
+          },
+           {
+              $unwind: {
+                  'path': '$books'
+              }
+          }, {
+              $match: {
+                  'books.numberOfPage': {
+                      '$gte': 200
+                  },
+                  'books.datePublicOfBook': {
+                      '$gte': 2015,
+                      '$lt': 2020
+                  }
+              }
+          }, {
+              '$project': {
+                  'nameOfBook': '$books.nameOfBook',
+                  'authorName': '$firstName'
+              }
+          }
+      ]
+      )
+      res.json(writer);
+  } catch (err) {
+      res.json({ message: err });
+  }
+});
+
+export default router;

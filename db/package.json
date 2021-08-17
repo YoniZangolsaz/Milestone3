@@ -9,7 +9,8 @@
     "serve": "node dist/app.js",
     "build-ts": "tsc",
     "dev:ts": "nodemon",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "lala": "nodemon src/app.ts"
   },
   "repository": {
     "type": "git",

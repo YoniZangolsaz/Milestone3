@@ -27,11 +27,11 @@ const express_1 = __importDefault(require("express"));
 const bodyParser = __importStar(require("body-parser"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const app = express_1.default();
-const createBook = require('./books/bookRouter');
-const createWriter = require('./writer/writerRouter');
+const bookRouter_1 = __importDefault(require("./books/bookRouter"));
+const writerRouter_1 = __importDefault(require("./writer/writerRouter"));
 app.use(bodyParser.json());
-app.use('/books', createBook);
-app.use('/writers', createWriter);
+app.use('/books', bookRouter_1.default);
+app.use('/writers', writerRouter_1.default);
 mongoose_1.default.connect('mongodb://0.0.0.0:27017', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose_1.default.connection.on('connected', () => {
     console.log('MongoDB Connected!');

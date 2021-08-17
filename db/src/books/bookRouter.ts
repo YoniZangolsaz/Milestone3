@@ -2,14 +2,14 @@
 /* eslint-disable import/newline-after-import */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-const express = require('express');
+import express from 'express';
+import Book from './bookModel';
 const router = express.Router();
-const Book = require('./bookModel');
 
 // Get all books
 router.get('/', async (req:any, res:any) => {
   try {
-    const books:String = await Book.find().populate('writerOfBook');
+    const books:String = await Book.find();
     res.json(books);
   } catch (err) {
     res.json({ message: err });
@@ -17,7 +17,7 @@ router.get('/', async (req:any, res:any) => {
 });
 
 // Submit a book
-router.post('/', async (req:any, res:any) => {
+router.post('/', async (req, res) => {
   const {
     nameOfBook, descriptionOfBook, datePublicOfBook, writerOfBook, numberOfPage,
   } = req.body;
@@ -29,17 +29,28 @@ router.post('/', async (req:any, res:any) => {
     numberOfPage,
   });
   try {
-    const savedBook:String = await book.save();
+    const savedBook = await book.save();
     res.json(savedBook);
   } catch (err) {
     res.json({ message: err });
   }
 });
 
-// Spesific writer
-router.get('/name/:nameOfWriter._id', async (req:any, res:any) => {
+// Spesific book
+router.get('/name/:nameOfBook', async (req:any, res:any) => {
   try {
-    const book:String = await Book.find({numberOfPage:req.params.nameOfWriter._id});
+    const book:String = await Book.find({nameOfBook: {$regex:req.params.nameOfBook}});
+    res.json(book);
+  } catch (err) {
+    res.json({ message: err });
+  }
+  
+});
+
+//Show books that have at least 250 pages 
+router.get('/pages/250', async (req:any, res:any) => {
+  try {
+    const book:String = await Book.find({numberOfPage: { $gte: 250 }}).sort({numberOfPage: 1});
     res.json(book);
   } catch (err) {
     res.json({ message: err });
@@ -57,20 +68,10 @@ router.delete('/:bookId', async (req:any, res:any) => {
   }
 });
 
-// Spesific book
-router.get('/id/:bookId', async (req:any, res:any) => {
-  try {
-    const book:String = await Book.findById(req.params.bookId).populate('writerOfBook');
-    res.json(book);
-  } catch (err) {
-    res.json({ message: err });
-  }
-});
-
 // Update a book
 router.patch('/:bookId', async (req:any, res:any) => {
   try {
-    const updatedBook:String = await Book.updateAll(
+    const updatedBook:String = await Book.updateMany(
       { _id: req.params.bookId },
       { $set: { nameOfBook: req.body.nameOfBook } },
     );
@@ -80,6 +81,6 @@ router.patch('/:bookId', async (req:any, res:any) => {
   }
 });
 
-module.exports = router;
+export default router;
 
 

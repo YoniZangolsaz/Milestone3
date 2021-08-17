@@ -6,7 +6,7 @@ const writerSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   yearOfBirth: { type: Number, required: true },
-  listOfBook:[{type: Number, required: true }] 
-}, {versionKey: false});
+  listOfBook: [{ type: mongoose.Schema.Types.ObjectId, required: true, ref: 'book' }]
+}, { versionKey: false });
 
-module.exports = mongoose.model('writer', writerSchema);
+export default mongoose.model('writer', writerSchema);

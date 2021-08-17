@@ -5,15 +5,15 @@ import mongoose from 'mongoose';
 
 
 const app = express();
-const createBook = require('./books/bookRouter');
-const createWriter = require('./writer/writerRouter');
+import createBook from './books/bookRouter';
+import createWriter from './writer/writerRouter';
 
 
 app.use(bodyParser.json());
 app.use('/books', createBook);
 app.use('/writers', createWriter);
 
-mongoose.connect('mongodb://0.0.0.0:27017', { useNewUrlParser: true, useUnifiedTopology: true });
+const db =  mongoose.connect('mongodb://0.0.0.0:27017', { useNewUrlParser: true, useUnifiedTopology: true });
 
 mongoose.connection.on('connected', () => {
   console.log('MongoDB Connected!');
@@ -22,3 +22,5 @@ mongoose.connection.on('connected', () => {
 app.listen(3010, () => {
   console.log('listening to port 3010');
 });
+
+
