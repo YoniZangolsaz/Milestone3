@@ -4,12 +4,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import express from 'express';
 import Writer from './writerModel';
+import {Iwriter} from '../interface/writer.interface'
 const router = express.Router();
 
 // Get all writers
 router.get('/', async (req:any, res:any) => {
   try {
-    const writers = await Writer.find().populate('listOfBook');
+    const writers:Iwriter = await Writer.find().populate('listOfBook');
     res.json(writers);
   } catch (err) {
     res.json({ message: err });
@@ -38,7 +39,7 @@ router.post('/', async (req:any, res:any) => {
 // Delete writer
 router.delete('/:writerId', async (req:any, res:any) => {
   try {
-    const removedWriter = await Writer.remove({ _id: req.params.writerId });
+    const removedWriter:Iwriter = await Writer.remove({ _id: req.params.writerId });
     res.json(removedWriter);
   } catch (err) {
     res.json({ message: err });
@@ -48,7 +49,7 @@ router.delete('/:writerId', async (req:any, res:any) => {
 // Update a writer
 router.patch('/:writerId', async (req:any, res:any) => {
   try {
-    const updatedWriter = await Writer.updateOne(
+    const updatedWriter:Iwriter = await Writer.updateOne(
       { _id: req.params.writerId },
       { $set: { firstName: req.body.firstName } },
     );
@@ -61,7 +62,7 @@ router.patch('/:writerId', async (req:any, res:any) => {
 // Spesific writer
 router.get('/name/:nameOfWriter', async (req:any, res:any) => {
   try {
-    const writer = await Writer.findOne({firstName:req.params.nameOfWriter}).select('listOfBook -_id').populate('listOfBook');
+    const writer:Iwriter = await Writer.find({firstName:req.params.nameOfWriter}).select('listOfBook -_id').populate('listOfBook');
     res.json(writer);
   } catch (err) {
     res.json({ message: err });
@@ -69,7 +70,7 @@ router.get('/name/:nameOfWriter', async (req:any, res:any) => {
   
 });
 
-router.get('/aggregate', async (req: any, res: any) => {
+router.get('/mission/aggregate', async (req: any, res: any) => {
   try {
       const writer = await Writer.aggregate([
           {

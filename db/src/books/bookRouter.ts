@@ -4,12 +4,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import express from 'express';
 import Book from './bookModel';
+import {Ibook} from '../interface/book.interface'
 const router = express.Router();
 
 // Get all books
 router.get('/', async (req:any, res:any) => {
   try {
-    const books:String = await Book.find();
+    const books:Ibook = await Book.find();
     res.json(books);
   } catch (err) {
     res.json({ message: err });
@@ -36,21 +37,30 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Spesific book
+// Spesific book by name of book
 router.get('/name/:nameOfBook', async (req:any, res:any) => {
   try {
-    const book:String = await Book.find({nameOfBook: {$regex:req.params.nameOfBook}});
+    const book:Ibook = await Book.find({nameOfBook: {$regex:req.params.nameOfBook}})
     res.json(book);
   } catch (err) {
     res.json({ message: err });
   }
-  
+});
+
+// Spesific book by description of book
+router.get('/description/:descriptionOfBook', async (req:any, res:any) => {
+  try {
+    const book:Ibook = await Book.find({descriptionOfBook: {$regex:req.params.descriptionOfBook}})
+    res.json(book);
+  } catch (err) {
+    res.json({ message: err });
+  }
 });
 
 //Show books that have at least 250 pages 
 router.get('/pages/250', async (req:any, res:any) => {
   try {
-    const book:String = await Book.find({numberOfPage: { $gte: 250 }}).sort({numberOfPage: 1});
+    const book:Ibook = await Book.find({numberOfPage: { $gte: 250 }}).sort({numberOfPage: 1});
     res.json(book);
   } catch (err) {
     res.json({ message: err });
@@ -61,7 +71,7 @@ router.get('/pages/250', async (req:any, res:any) => {
 // Delete book
 router.delete('/:bookId', async (req:any, res:any) => {
   try {
-    const removedBook:String = await Book.remove({ _id: req.params.bookId });
+    const removedBook:Ibook = await Book.remove({ _id: req.params.bookId });
     res.json(removedBook);
   } catch (err) {
     res.json({ message: err });
@@ -71,7 +81,7 @@ router.delete('/:bookId', async (req:any, res:any) => {
 // Update a book
 router.patch('/:bookId', async (req:any, res:any) => {
   try {
-    const updatedBook:String = await Book.updateMany(
+    const updatedBook:Ibook = await Book.updateMany(
       { _id: req.params.bookId },
       { $set: { nameOfBook: req.body.nameOfBook } },
     );
